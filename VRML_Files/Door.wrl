@@ -1,0 +1,222 @@
+#VRML V2.0 utf8
+Transform {
+  translation	-725 1475 0
+  children [
+Shape {
+    appearance	Appearance {
+		texture	ImageTexture {
+			url	"texture/door.jpg"
+		}
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor .1 .1 .1
+			transparency 0
+      }
+    }
+    geometry	Box { size 50 2950 200 }
+  }
+]
+}
+Transform {
+  translation	725 1475 0
+  children [
+Shape {
+    appearance	Appearance {
+		texture	ImageTexture {
+			url	"texture/door.jpg"
+		}
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor .1 .1 .1
+			transparency 0
+      }
+    }
+    geometry	Box { size 50 2950 200 }
+  }
+]
+}
+Transform {
+  translation	0 2975 0
+  children [
+Shape {
+    appearance	Appearance {
+		texture	ImageTexture {
+			url	"texture/door.jpg"
+		}
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor .1 .1 .1
+			transparency 0
+      }
+    }
+    geometry	Box { size 1500 50 200 }
+  }
+]
+}
+PROTO doorleft[
+]
+{
+	DEF	doorleft Transform {
+		translation	-690 1475 60
+		children [
+			Transform {
+				translation	340 0 0
+				children [
+					Shape {
+						appearance	Appearance {
+							texture	ImageTexture {
+								url	"texture/door.jpg"
+							}
+							material	Material {
+								diffuseColor .6 .6 .6
+								emissiveColor .1 .1 .1
+								ambientIntensity .1
+								shininess .6
+								specularColor .1 .1 .1
+								transparency 0
+							}
+						}
+						geometry	Box { size 680 2930 80 }
+					}
+					DEF	myTouch TouchSensor {}
+				]
+			}
+		]
+	}
+	DEF	Clockleft1 TimeSensor 
+	{cycleInterval 3
+	}
+	DEF	Clockleft2 TimeSensor {
+		cycleInterval 3
+	}
+	DEF	MyOrileft1 OrientationInterpolator {
+		key	[0 1]
+		keyValue [
+			0 1 0 0
+			0 1 0 -1.5
+		]
+    }
+	DEF	MyOrileft2 OrientationInterpolator {
+		key	[0 1]
+		keyValue [
+			0 1 0 -1.5
+			0 1 0 0			
+		]
+    }
+	DEF	openCloseleft Script {
+		field SFBool	isClose TRUE
+   eventIn SFTime touchTime
+   eventOut	SFTime openD
+   eventOut	SFTime closeD
+		url "javascript:
+		function touchTime()
+		{
+		if ( isClose == true )  {
+		isClose = false;
+		openD = touchTime;
+		} else 
+		{
+		isClose = true ;
+		closeD = touchTime ;
+		}  	   
+		}  
+		"
+	}
+	ROUTE myTouch.touchTime TO	openCloseleft.touchTime
+	ROUTE openCloseleft.openD TO Clockleft1.startTime
+	ROUTE Clockleft1.fraction_changed TO	MyOrileft1.set_fraction
+	ROUTE MyOrileft1.value_changed TO doorleft.rotation
+	ROUTE myTouch.touchTime	TO openCloseleft.touchTime
+	ROUTE openCloseleft.closeD TO Clockleft2.startTime
+	ROUTE Clockleft2.fraction_changed TO MyOrileft2.set_fraction
+	ROUTE MyOrileft2.value_changed TO doorleft.rotation
+}
+doorleft{}
+PROTO doorright[
+]
+{
+	DEF	doorright Transform {
+		translation	690 1475 60
+		children [
+			Transform {
+				translation	-340 0 0
+				children [
+					Shape {
+						appearance	Appearance {
+							texture	ImageTexture {
+								url	"texture/door.jpg"
+							}
+							material	Material {
+								diffuseColor .6 .6 .6
+								emissiveColor .1 .1 .1
+								ambientIntensity .1
+								shininess .6
+								specularColor .1 .1 .1
+								transparency 0
+							}
+						}
+						geometry	Box { size 680 2930 80 }
+					}
+					DEF	myTouch TouchSensor {}
+				]
+			}
+		]
+	}
+	DEF	Clockright1 TimeSensor 
+	{cycleInterval 3
+	}
+	DEF	Clockright2 TimeSensor {
+		cycleInterval 3
+	}
+	DEF	MyOriright1 OrientationInterpolator {
+		key	[0 1]
+		keyValue [
+			0 1 0 0
+			0 1 0 1.5
+		]
+    }
+	DEF	MyOriright2 OrientationInterpolator {
+		key	[0 1]
+		keyValue [
+			0 1 0 1.5
+			0 1 0 0			
+		]
+    }
+	DEF	openCloseright Script {
+		field SFBool	isClose TRUE
+   eventIn SFTime touchTime
+   eventOut	SFTime openD
+   eventOut	SFTime closeD
+		url "javascript:
+		function touchTime()
+		{
+		if ( isClose == true )  {
+		isClose = false;
+		openD = touchTime;
+		} else 
+		{
+		isClose = true ;
+		closeD = touchTime ;
+		}  	   
+		}  
+		"
+	}
+	ROUTE myTouch.touchTime TO	openCloseright.touchTime
+	ROUTE openCloseright.openD TO Clockright1.startTime
+	ROUTE Clockright1.fraction_changed TO	MyOriright1.set_fraction
+	ROUTE MyOriright1.value_changed TO doorright.rotation
+	ROUTE myTouch.touchTime	TO openCloseright.touchTime
+	ROUTE openCloseright.closeD TO Clockright2.startTime
+	ROUTE Clockright2.fraction_changed TO MyOriright2.set_fraction
+	ROUTE MyOriright2.value_changed TO doorright.rotation
+}
+doorright{} 

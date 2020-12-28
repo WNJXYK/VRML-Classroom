@@ -1,0 +1,191 @@
+#VRML V2.0 utf8
+PROTO Curtain[ eventIn SFInt32 status]{
+DEF Curtain Group{
+	children[
+		
+		# Curtain Pipe
+		Transform{
+			translation	0.0 7.7 -15.8
+			rotation 0 0 1 1.57
+			children[
+				Shape{
+					appearance Appearance{
+						material Material {
+						diffuseColor .3 .3 .3
+						emissiveColor .3 .3 .3
+						ambientIntensity .1
+						shininess .2
+						specularColor 1 1 1
+						transparency 0
+    				}
+					texture	ImageTexture {url "texture/wood.jpg"}
+					}
+					geometry Cylinder{
+						height 18.5
+						radius 0.2
+					}
+				}
+			]
+		}
+
+		# Curtain
+		DEF	curtain Transform
+		{
+			translation	0.0 7.35 -15.8
+			scale 1 1 1
+			children[
+				DEF pptSwitch Switch{
+					whichChoice 2
+					choice [
+						Shape{
+							appearance Appearance{
+								material Material{ 
+									emissiveColor 0 0 0 
+								}
+								texture	ImageTexture {url "texture/ppt.png"}
+							}
+							geometry Box{ size 18.0 0.5 0.1 }
+						}
+
+						Shape{
+							appearance Appearance{
+								material Material{ 
+									emissiveColor 0 0 0 
+								}
+								texture	MovieTexture {
+									url "texture/windows.avi"
+									loop TRUE
+								}
+							}
+							geometry Box{ size 18.0 0.5 0.1 }
+						}
+
+						Shape{
+							appearance Appearance{
+								material Material{ 
+									emissiveColor 0 0 0 
+								}
+							}
+							geometry Box{ size 18.0 0.5 0.1 }
+						}
+					]
+				}
+			]
+		}
+
+		# Controller
+		Transform{
+			translation	-10.0 1.0 -15.9
+			children [
+				DEF	touchs TouchSensor{}
+				Shape{
+					appearance Appearance{
+						material Material{
+							diffuseColor 0.0 1.0 0.0
+						}
+					}
+					geometry Sphere{
+						radius 0.3
+					}
+				}
+		
+			]
+		}
+	]
+}
+
+
+
+DEF	downClock TimeSensor { cycleInterval 3 }
+DEF	upClock TimeSensor { cycleInterval 1 }
+DEF	downA PositionInterpolator
+{
+	key	[0.00 0.25 0.50 0.75 1.00]
+	keyValue
+	[
+		1 1 1
+		1 4 1 
+		1 8 1
+	    1 16 1
+		1 24 1
+	]
+}
+DEF	downB PositionInterpolator
+{
+	key	[0.00 0.25 0.50 0.75 1.00]
+	keyValue
+	[
+		0.0 7.35 -15.8
+		0.0 6.6 -15.8
+		0.0 5.6 -15.8
+		0.0 3.6 -15.8
+		0.0 1.6 -15.8
+	]
+}
+DEF	upA PositionInterpolator
+{
+	key	[0.00 0.25 0.50 0.75 1.00]
+	keyValue
+	[
+		1 24 1
+		1 16 1
+		1 8 1
+		1 4 1 
+		1 1 1
+	]
+}
+DEF	upB PositionInterpolator
+{
+	key	[0.00 0.25 0.50 0.75 1.00]
+	keyValue
+	[
+		0.0 1.6 -15.8
+		0.0 3.6 -15.8
+		0.0 5.6 -15.8
+		0.0 6.6 -15.8
+		0.0 7.35 -15.8
+	]
+}
+
+DEF	curtainScript Script {
+	field SFBool isUp TRUE
+	eventIn SFTime touchTime
+	eventIn SFInt32 changeStatus IS status
+
+	eventOut SFTime upEvent
+	eventOut SFTime downEvent
+	eventOut SFInt32 showPPT
+	
+	url "javascript:
+	function touchTime(time){
+		if (isUp)  {
+			isUp = false;
+			downEvent = time;
+		} else {
+			isUp = true ;
+			upEvent = time ;
+		}  	   
+	} 
+	function changeStatus(v){
+		showPPT=v;  
+	} 
+	"
+}
+
+ROUTE touchs.touchTime TO curtainScript.touchTime
+
+ROUTE curtainScript.upEvent TO upClock.startTime
+ROUTE upClock.fraction_changed TO upA.set_fraction
+ROUTE upA.value_changed	TO curtain.scale
+ROUTE upClock.fraction_changed TO upB.set_fraction
+ROUTE upB.value_changed	TO curtain.translation
+
+ROUTE curtainScript.downEvent TO downClock.startTime
+ROUTE downClock.fraction_changed TO downA.set_fraction
+ROUTE downA.value_changed	TO curtain.scale
+ROUTE downClock.fraction_changed TO downB.set_fraction
+ROUTE downB.value_changed	TO curtain.translation
+ROUTE curtainScript.showPPT	TO pptSwitch.whichChoice
+}
+
+Curtain{}

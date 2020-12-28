@@ -1,0 +1,378 @@
+#VRML V2.0 utf8
+
+
+DEF	chair Group	{
+	children [
+		# Wood Texture
+		DEF	CAD_Wood Appearance {
+    		material Material {
+				diffuseColor .8 .8 .8
+				emissiveColor .25 .25 .25
+				ambientIntensity .1
+				shininess .5
+				specularColor .5 .5 .5
+				transparency 0
+    		}
+			texture	ImageTexture {url "texture/wood.jpg"}
+		}
+
+		# Iron Texture
+		DEF	CAD_Iron Appearance {
+    		material Material {
+				diffuseColor .3 .3 .3
+				emissiveColor .3 .3 .3
+				ambientIntensity .1
+				shininess .10
+				specularColor 1 1 1
+				transparency 0
+    		}
+			texture	ImageTexture {url "texture/iron.jpg"}
+		}		  
+
+		DEF	CAD_Plastic Appearance{
+			material Material {
+				diffuseColor .1 .1 .1
+				ambientIntensity .25
+				shininess .11
+				specularColor .74 .6 .74
+    		}
+		}
+
+		# Desk Side
+		DEF	CAD_Deskside Appearance{
+			material Material {
+				diffuseColor .3 .3 .3
+				emissiveColor .3 .3 .3
+				ambientIntensity .1
+				shininess .10
+				specularColor 1 1 1
+				transparency 0
+    		}
+			texture	ImageTexture {url "texture/desk_side.jpg"}
+		}
+
+
+
+		# Chair&Desk Node
+		DEF ChairAndDesk Transform {
+			rotation 0 0 0 0
+
+			children	[
+				# Chair Wood Board
+				DEF Woodboard Transform {
+					translation	0 805 0
+					children [
+						Shape {
+    						appearance	USE	CAD_Wood
+    						geometry	Box { size 660 10 420 }
+						}
+					]
+				}
+
+				# Chair Left Side
+				DEF Leftside Transform {
+					translation	-225 710 0
+					children [
+						Shape {
+    						appearance USE CAD_Deskside
+    						geometry	Box { size 10 160 320 }
+						}
+					]
+				}
+
+				# Chair Back Side
+				DEF Backside Transform {
+					translation	0 710 -155
+					children [
+						Shape {
+    						appearance USE CAD_Deskside
+    						geometry	Box { size 440 160 10 }
+						}
+					]
+				}
+				# Chair Right Side
+				DEF Rightside Transform {
+					translation	225 710 0
+					children [
+						Shape {
+    						appearance USE CAD_Deskside
+    						geometry	Box { size 10 160 320 }
+						}
+					]
+				}
+
+				# Chair Bottom Side
+				DEF Bottomside Transform {
+					translation	0 625 0
+					children [
+						Shape {
+    						appearance	USE	CAD_Iron
+    						geometry	Box { size 460 10 320 }
+						}
+					]
+				}
+
+				# Chair board
+				DEF Chairboard Transform {
+					translation	0 395 520
+					rotation 1 0 0 1.3
+					children [
+						Shape {
+    						appearance	USE	CAD_Wood
+    						geometry	Box { size 460 10 420 }
+						}
+						DEF	chairTouch TouchSensor {}
+					]
+				}
+
+				# Chair Back Board
+				DEF Chairback Transform {
+					translation	0 820 745
+					rotation 1.0 0.0 0.0 0.16
+					children [
+						Transform {
+							translation	0 -150 0
+							children [
+								Shape {
+    								appearance USE CAD_Wood
+    								geometry	Box { size 490 300 10 }
+								}
+							]
+						}
+
+					]
+				}
+
+				# Left Support
+				DEF DeskAndChairSupport Transform {
+					translation	0 0 0
+					children [
+
+						# Middle Link
+						Transform {
+							translation	-245 775 0
+							children [
+								Shape {
+									appearance	USE	CAD_Iron
+									geometry	Box { size 30 30 300 }
+								}
+							]
+						}
+		
+						# Desk Safe Plastic 
+						DEF Desksafe Transform {
+							translation	-245 775 162.5
+							children [
+								Shape {
+									appearance	USE	CAD_Plastic
+									geometry	Box { size 40 30 25 }
+								}
+							]
+						}
+						Transform {
+							translation	0 0 -325
+							children [
+								USE Desksafe
+							]
+						}
+
+		
+						# Horizontal Link Pillar
+						Transform {
+							translation	-245 760 0
+							rotation 0.0 0.0 1.0 1.57
+							scale 0.5 1.0 1.0
+							children [
+								Shape {
+									appearance	USE	CAD_Iron
+									geometry	Cylinder { radius 50 height 30 }
+								}
+							]
+						}
+
+						# Support Pillar
+						Transform {
+							translation	-245 385 0
+							scale 0.4 1.0 1.0
+							children [
+								Shape {
+									appearance	USE	CAD_Iron
+									geometry	Cylinder { radius 25 height 750 }
+								}
+							]
+						}
+
+						# Desk Foot
+						DEF Deskfoot Transform {
+							translation	0 0 0
+							children [
+								# Middle Pillar
+								Transform {
+									translation	-245 10 0
+									children [
+										Shape {
+											appearance	USE	CAD_Iron
+											geometry	Box { size 50 20 400 }
+										}
+									]
+								}
+
+								# Desk Safe
+								DEF Deskfootsafe Transform {
+									translation	-245 10 205
+									children [
+										Shape {
+											appearance USE CAD_Plastic
+											geometry Box { size 60 20 10 }
+										}
+									]
+								}
+								Transform {
+									translation	0 0 -410
+									children [ 
+										USE	Deskfootsafe
+				    				]
+								}
+							]
+						}
+
+						# Chair Foot 
+						Transform {
+							translation 0 0 520
+							children [
+								USE Deskfoot
+							]
+						}
+
+						# Chair Support Pillar
+						DEF	Chairsupport Transform {
+							translation	-245 0 520
+							children [
+								Transform {
+									translation	0 215 0
+									scale 0.6 1.0 1.0
+									children [
+										Shape {
+											appearance	USE	CAD_Iron
+											geometry	Cylinder { radius 25 height 370 }
+										}
+									]
+								}
+								Transform {
+									translation	0 25 0
+									scale 0.7 1.0 1.1
+									children [
+										Shape {
+    										appearance USE CAD_Plastic
+    										geometry Cylinder { radius 25 height 10 }
+										}
+									]
+								}
+
+							]
+						}
+
+						# Chair Arm
+						DEF Chairarm Transform {
+							translation	-245 400 520
+							children [
+								Shape {
+									geometry Extrusion {
+										crossSection [
+											-10 0
+											-8.67 -5
+											-5 -8.67
+											0 -10
+											5 -8.67
+											8.67 -5
+											10 0
+											8.67 5
+											5 8.67
+											0 10
+											-5 8.67 
+											-8.67 5
+											-10 0
+										]
+										spine [
+											0 0 0
+											0 10 0
+											0 20 5
+											0 30 10
+											#0 40 20
+											0 90 100
+											0 100 110
+											0 110 120
+											0 120 125
+											0 160 150
+											0 200 170
+											0 300 200
+											0 400 220
+											0 420 225
+										]
+										solid TRUE
+									}
+									appearance USE CAD_Iron
+			
+								}
+							]
+						}
+
+					]
+				}
+
+				# Right Support
+				Transform {
+					translation	490 0 0
+					children [
+						USE DeskAndChairSupport
+					]
+				}
+
+			]
+		}
+	]
+}
+
+DEF	RotateChairClock TimeSensor  { cycleInterval 1 }
+DEF	ReverseChairRotateClock TimeSensor {	cycleInterval 1 }
+DEF	RotateChair OrientationInterpolator {
+	key	[0 1]
+	keyValue [ 
+		1 0 0 1.3
+		1 0 0 0
+	]
+}
+DEF	ReverseRotateChair OrientationInterpolator {
+	key	[0 1]
+	keyValue [ 
+		1 0 0 0	
+		1 0 0 1.3	
+	]
+}
+DEF	chairScript Script {
+	field SFBool isClose TRUE
+	eventIn SFTime touchTime
+	eventOut SFTime rotateChair
+	eventOut SFTime reverseChair
+	url "javascript:
+	function touchTime(touchDuration){
+		if (isClose)  {
+			isClose = false;
+			rotateChair = touchDuration;
+		} else {
+			isClose = true ;
+			reverseChair = touchDuration ;
+		}  	   
+	}  
+	"
+}
+
+ROUTE chairTouch.touchTime TO chairScript.touchTime
+
+ROUTE chairScript.rotateChair TO RotateChairClock.startTime
+ROUTE RotateChairClock.fraction_changed TO RotateChair.set_fraction
+ROUTE RotateChair.value_changed TO Chairboard.rotation
+
+ROUTE chairScript.reverseChair TO ReverseChairRotateClock.startTime
+ROUTE ReverseChairRotateClock.fraction_changed TO ReverseRotateChair.set_fraction
+ROUTE ReverseRotateChair.value_changed TO Chairboard.rotation

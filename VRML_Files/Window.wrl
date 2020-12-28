@@ -1,0 +1,243 @@
+#VRML V2.0 utf8
+
+ Background {
+ skyAngle [ 1.1, 1.4, 1.57 ]
+ skyColor [ .176 .314 .529, .176 .314 .529, .314 .549 .784, .706 .824 .922 ]
+ groundAngle	[ 1.4, 1.57 ]
+ groundColor [ .255 .588 .275, .255 .588 .275, .216 .412 .235 ]
+}
+
+DEF slideBar Transform{children	[Transform {
+  translation	0 1010 -75
+  rotation 0 0 1 1.57
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor 1 1 1
+			transparency 0
+      }
+    }
+    geometry	Cylinder { radius 20 height 2400 }
+  }
+]
+}
+DEF curtain Transform {
+  translation	0 -750 -75
+   center	1250 4 0
+	 scale 1 1 1
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor 0 0 0
+			transparency 0
+      }
+	  texture ImageTexture {url "texture/curtain.jpg"}
+	  textureTransform TextureTransform {
+		scale 3 1
+	  }
+    }
+    geometry	Box { size 2500 3500 1 }
+  }
+  DEF touchCurtain TouchSensor {}
+]
+}
+]}
+
+Transform {
+		
+		children [
+	DEF top Transform {
+  translation	0 500 0
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+						emissiveColor .1 .1 .1
+						ambientIntensity .1
+						shininess .6
+						specularColor .2 .2 .2
+						transparency .3
+      }
+	  texture ImageTexture {url "texture/window.jpeg"}
+    }
+    geometry	Box { size 2400 1000 50 }
+  }
+]
+}
+
+DEF	bottom-left Transform {
+	translation	-600 -1000 0
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+						emissiveColor .1 .1 .1
+						ambientIntensity .1
+						shininess .6
+						specularColor .2 .2 .2
+						transparency .3
+      }
+	  texture ImageTexture {url "texture/window-left.jpg"}
+    }
+    geometry	Box { size 1200 2000 50 }
+  }
+  DEF touchLeftWindow TouchSensor {}
+]
+}
+
+DEF	bottom-right Transform {
+	  translation	600 -1000 0
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+						emissiveColor .1 .1 .1
+						ambientIntensity .1
+						shininess .6
+						specularColor .2 .2 .2
+						transparency .3
+      }
+	  texture ImageTexture {url "texture/window-right.jpeg"}
+    }
+    geometry	Box { size 1200 2000 50 }
+  }
+   DEF	touchRightWindow TouchSensor {}
+]
+}
+]}
+DEF	openLeftWindowTime TimeSensor	{cycleInterval 3 loop FALSE }
+DEF	closeLeftWindowTime TimeSensor {cycleInterval 3 loop FALSE }
+DEF	openRightWindowTime TimeSensor	{cycleInterval 3 loop FALSE }
+DEF	closeRightWindowTime TimeSensor	{cycleInterval 3 loop FALSE }
+DEF	openCurtainTime TimeSensor {cycleInterval 3 loop FALSE }
+DEF	closeCurtainTime TimeSensor {cycleInterval 3 loop FALSE }
+
+
+
+
+
+
+DEF	OpenClose Script {
+	field SFBool isLClose  TRUE
+    field SFBool isRClose  TRUE 
+	eventIn SFTime touchLTime
+	eventIn	SFTime touchRTime
+	eventIn	SFTime touchCTime
+	eventOut SFTime	openLTime
+	eventOut SFTime	closeLTime
+	eventOut SFTime	openRTime
+	eventOut SFTime	closeRTime
+	eventOut SFTime openCTime
+	eventOut SFTime  closeCTime
+	url	"javascript:
+	function touchLTime(time){
+		if ( isLClose	== true ) {
+			isLClose = false;
+			openLTime = time;	
+		} else {
+		   isLClose = true;
+			closeLTime = time;
+		} 	
+	}
+	function touchRTime(time){
+		if ( isRClose	== true ) {
+			isRClose = false;
+			openRTime = time;	
+		} else {
+		   isRClose = true;
+			closeRTime = time;
+		} 	
+	} 
+function touchCTime(time){
+		if ( isLClose	== true ) {
+			isLClose = false;
+			openCTime = time;	
+		} else {
+		   isLClose = true;
+			closeCTime = time;
+		} 	
+	}	
+	"
+	
+}
+
+DEF	openLTime  TimeSensor {cycleInterval 1 loop FALSE }
+DEF	closeLTime TimeSensor {cycleInterval 1 loop FALSE }
+DEF	openRTime  TimeSensor {cycleInterval 1 loop FALSE }
+DEF	closeRTime TimeSensor {cycleInterval 1 loop FALSE }
+DEF	openCTime  TimeSensor {cycleInterval 1 loop FALSE }
+DEF	closeCTime TimeSensor {cycleInterval 1 loop FALSE }
+
+
+DEF	openLWindow PositionInterpolator {
+	key	[0 1]
+	keyValue [-600 -1000 0  ,600 -1000 0 ]
+}
+
+DEF	closeLWindow PositionInterpolator {
+	key	[0 1]
+	keyValue [600 -1000 0 ,-600 -1000 0]
+}
+
+DEF	openRWindow PositionInterpolator {
+	key	[0 1]
+	keyValue [600 -1000 0, -600 -1000 0 ]
+}
+
+DEF	closeRWindow PositionInterpolator {
+	key	[0 1]
+	keyValue [-600 -1000 0 , 600 -1000 0 ]
+}
+DEF	openCurtain PositionInterpolator {
+	key	[0 1]
+	keyValue [	1 1 1	
+		0.2 1 1 ]
+}
+
+DEF	closeCurtain PositionInterpolator {
+	key	[0 1]
+	keyValue [	0.2 1 1	
+		1 1 1]
+}
+
+ROUTE touchLeftWindow.touchTime TO OpenClose.touchLTime
+ROUTE touchRightWindow.touchTime TO OpenClose.touchRTime
+ROUTE touchCurtain.touchTime TO	OpenClose.touchCTime
+
+
+ROUTE OpenClose.openLTime  TO openLTime.startTime
+ROUTE OpenClose.closeLTime TO closeLTime.startTime
+ROUTE openLTime.fraction_changed TO	openLWindow.set_fraction
+ROUTE openLWindow.value_changed TO bottom-left.translation
+ROUTE closeLTime.fraction_changed TO closeLWindow.set_fraction
+ROUTE closeLWindow.value_changed TO bottom-left.translation
+
+
+ROUTE OpenClose.openRTime  TO openRTime.startTime
+ROUTE OpenClose.closeRTime TO closeRTime.startTime
+ROUTE openRTime.fraction_changed TO	openRWindow.set_fraction
+ROUTE openRWindow.value_changed TO bottom-right.translation
+ROUTE closeRTime.fraction_changed TO closeRWindow.set_fraction
+ROUTE closeRWindow.value_changed TO bottom-right.translation
+
+ROUTE OpenClose.openCTime  TO openCTime.startTime
+ROUTE OpenClose.closeCTime TO closeCTime.startTime
+ROUTE openCTime.fraction_changed TO	openCurtain.set_fraction
+ROUTE openCurtain.value_changed TO curtain.scale
+ROUTE closeCTime.fraction_changed TO closeCurtain.set_fraction
+ROUTE closeCurtain.value_changed TO curtain.scale
+
+

@@ -1,0 +1,138 @@
+#VRML V2.0 utf8
+
+#By Lin Ruichai 24320062204322
+ Background {
+	skyAngle [ 1, 1.5, 1.571 ]
+	skyColor [ 0 .2 .7, 0 .5 1.0, .85 .9 .95 ]
+	groundAngle	[ 1.4, 1.52, 1.57 ]
+	groundColor [ .25 .455 .141, .25 .455 .141, .1 .329 .129, .259 .408 .4 ]
+}
+
+DEF blackboard Transform {
+	 rotation 0 -1 0 1.57
+	 scale 40 40 40
+	children [
+
+Transform {								 #the edge of blackboard
+  translation	6.5 6.3 0
+  #rotation 0 0 -1 0.5
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .33 .3 .28
+			ambientIntensity .687
+			shininess .1
+			specularColor .31 .25 .13
+      }
+    }
+  	geometry Extrusion {
+	    crossSection  [2 2,2 1,1 1 ,1 -1, 2 -1, 2 -2 ,-2 -2 ,-2 -1 ,-1 -1, -1 1, -2 1, -2 2, 2 2] 
+		spine [-58 20 -30, 58 20 -30, 58 -20 -30, -58 -20 -30,-58 20 -30]
+		scale  [1 1, 1 1 ,1 1]
+		orientation	0 0 1 0
+		ccw	TRUE
+  	}
+  }
+]
+}
+
+Transform {					   #the blackboard
+  translation	6.5 6 -30
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .227 .306 0
+			ambientIntensity .06
+			shininess .39
+			specularColor 0 0 0 
+      }
+    }
+    geometry	Box { size 116 36 2 }
+  }
+]
+}
+
+Transform {								 #the edge to hold cholks
+  translation	6.5 6.3 -56
+  rotation 0 1 0 3.14
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .33 .3 .28
+			ambientIntensity .687
+			shininess .1
+			specularColor .31 .25 .13
+      }
+    }
+  	geometry Extrusion {
+	    crossSection  [2 6 ,1 2,1 -2,  2 -6 ,-2 -6 , -2 6, 2 6] 
+		spine [ 59 -20 -30, -59 -20 -30]
+		endCap TRUE
+		beginCap TRUE
+	
+	
+  	}
+  }
+]
+}
+
+
+Transform {	
+  translation	-15 5 -25
+  children [
+Shape {
+    appearance	Appearance {
+		material	Material {
+			diffuseColor .8 .51 .09
+			ambientIntensity .117
+			shininess .4
+			specularColor .92 .43 .01
+      }
+    }
+    geometry	Text {
+      fontStyle	FontStyle {
+			size 4
+			style "ITALIC"
+			family "Sanserif"	 
+      }
+      string "Virtual Reality Class Project: Classroom"
+    }
+  }
+]
+}
+
+
+
+
+
+
+]}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

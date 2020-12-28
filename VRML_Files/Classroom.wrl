@@ -1,0 +1,547 @@
+#VRML V2.0 utf8
+DirectionalLight {
+	on TRUE 
+	ambientIntensity 0.1
+	direction -1 -1 1}
+DirectionalLight {
+	on TRUE 
+	ambientIntensity 0.1
+	direction 1 1 -1}
+Viewpoint { 
+	position 0 2000 6000
+	description	"Center"
+	jump FALSE
+}
+
+Viewpoint { 
+	position 0 2000 9000
+	description	"Center Back"
+	jump FALSE
+}
+
+Viewpoint { 
+	position -3250 2000 9500
+	orientation	0.0 1.0 0.0 -0.5
+	description	"Right Back"
+	jump FALSE
+}
+Viewpoint { 
+	position 0 2000 3000
+	orientation	0.0 1.0 0.0 -3.25
+	description	"Center Back Reverse"
+	jump FALSE
+}
+
+Background {
+	backUrl	"texture/background.jpg"
+	frontUrl "texture/background.jpg"
+	leftUrl	"texture/background.jpg"
+	rightUrl "texture/background.jpg"
+	topUrl "texture/sky.jpg"
+	bottomUrl "texture/ground.jpg"
+}
+
+# Wall Texutre
+DEF	AP_FLOOR Appearance{
+    material Material {
+		diffuseColor 1 1 1
+	}
+	texture	ImageTexture {
+		url "texture/floor.jpg"
+		repeatS	TRUE
+		repeatT	TRUE
+	}
+}
+DEF	AP_WALL Appearance{
+    material Material {
+		diffuseColor 1 1 1
+	}
+	texture	ImageTexture {
+		url "texture/wall.jpg"
+		repeatS	TRUE
+		repeatT	TRUE
+	}
+}
+
+# Front-Middle Wall
+Transform {
+	translation	1050 2200 0
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry Box { size 6900 4200 200 }
+		}
+	]
+}
+
+# Front-Door Wall
+Transform {
+	translation	-3950 2200 0
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry Box { size 600 4200 200 }
+		}
+	]
+}
+
+# Left Wall
+Transform {
+	translation	-4350 2200 5000
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry Box { size 200 4200 10200 }
+		}
+	]
+}
+
+# Right Wall
+Transform {
+	translation	4500 2200 5000
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry Box { size 200 4200 10200 }
+		}
+	]
+}
+
+# Main Back Wall 
+Transform {
+	translation	2950 2200 10000
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry Box { size 3300 4200 200 }
+		}
+	]
+}
+
+# Back Wall Bridge
+Transform {
+	translation	1350 2200 10100
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry	Box { size 400 4200 400 }
+		}
+	]
+}
+
+# Back Wall Bridge
+Transform {
+	translation	-1100 2200 10100
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry Box { size 400 4200 400 }
+		}
+	]
+}
+
+# Right Back Wall 
+Transform {
+	translation	-4000 2200 10000
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry Box { size 900 4200 200 }
+		}
+	]
+}
+
+# Back Wall Bridge
+Transform {
+	translation	-3550 2200 10100
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry Box { size 400 4200 400 }
+		}
+	]
+}
+
+# Back Window
+Transform {
+	translation	175 550 10000
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry Box { size 2150 900 200 }
+		}
+	]
+}
+Transform {
+	translation	175 4150 10000
+	children [
+		Shape {
+    		appearance  USE AP_WALL
+    		geometry Box { size 2150 300 200 }
+		}
+	]
+}
+
+# Back Window
+Transform {
+	translation	-2375 550 10000
+	children [
+		Shape {
+    		appearance  USE AP_WALL
+    		geometry Box { size 2150 900 200 }
+		}
+	]
+}
+Transform {
+	translation	-2375 4150 10000
+	children [
+		Shape {
+    		appearance  USE AP_WALL
+    		geometry Box { size 2150 300 200 }
+		}
+	]
+}
+
+
+# Top Wall
+Transform {
+	translation	75 4400 5150
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry	Box { size 9050 200 10900 }
+		}
+	]
+}
+
+# Bottom Wall
+Transform {
+	translation	75 50 5150
+	children [
+		Shape {
+    		appearance USE AP_FLOOR
+    		geometry Box { size 9050 200 10900 }
+		}
+	]
+}
+
+# Door Up Wall
+Transform {
+	translation	-3050 3700 0
+	children [
+		Shape {
+    		appearance USE AP_WALL
+    		geometry Box { size 1200 1200 200 }
+		}
+	]
+}
+
+#Door 
+Transform {
+	translation	-3050 100 0
+	rotation 0.0 1.0 0.0 3.14
+	scale 0.8 1.0 1.0
+	children [
+		Inline {
+			url	"Door.wrl"
+		}
+	]
+}
+
+# Window
+Transform {
+	translation	175 3000 9850
+	scale 0.89583 1 1
+	children [
+		Inline {
+			url	"Window.wrl"
+		}
+	]
+}
+
+# Window
+Transform {
+	translation	-2375 3000 9850
+	scale 0.89583 1 1
+	children [
+		Inline {
+			url	"Window.wrl"
+		}
+	]
+}
+
+# Blackboard
+Transform {
+	translation	-200 2000 1400
+	rotation 0 1 0 1.571
+	scale 1 1 0.8
+	children [
+		Inline {
+			url	"Blackboard.wrl"
+		}
+	]
+}
+
+# Curtain
+EXTERNPROTO curtainNode[ eventIn SFInt32 status ]"Curtain.wrl#Curtain"
+Transform {
+	translation	-600 2000 2200
+	rotation 0 0 0 1.571
+	scale 150 150 100
+	children [
+		DEF	curtain curtainNode{}
+	]
+}
+
+
+# Platform
+EXTERNPROTO platformNode[ eventOut SFInt32 status ]"Platform.wrl#platform"
+Transform {
+	translation	0 200 1000 
+	rotation 0 1 0 1.571
+	children [
+		DEF platform platformNode {}
+	]
+}
+
+EXTERNPROTO	panitNode[  field MFString paintUrl ]"Paint.wrl#PaintNode"
+Transform{
+	translation	4200 2200 3800
+	scale 3 3 1
+	rotation 0 1 0 1.571
+	children [
+		panitNode{paintUrl "texture/flower.jpg"}
+	]
+}
+Transform{
+	translation	4200 2200 7500
+	scale 3 3 1
+	rotation 0 1 0 1.571
+	children [
+		panitNode{paintUrl "texture/horse.jpg"}
+	]
+}
+
+
+DEF	Chair_Row Transform	{
+	children [
+		Transform {
+			translation	0 200 3000 
+			children [
+				Inline {
+					url "Chair.wrl"
+				}
+			]
+		}
+
+		Transform {
+			translation	-1200 200 3000 
+			children [
+				Inline {
+					url "Chair.wrl"
+				}
+			]
+		}
+
+		Transform {
+			translation	1200 200 3000 
+			children [
+				Inline {
+					url "Chair.wrl"
+				}
+			]
+		}
+
+		Transform {
+			translation	-2400 200 3000 
+			children [
+				Inline {
+					url "Chair.wrl"
+				}
+			]
+		}
+
+		Transform {
+			translation	2400 200 3000 
+			children [
+				Inline {
+					url "Chair.wrl"
+				}
+			]
+		}
+	]
+}
+
+Transform {
+	translation	0 0 1500
+	children USE Chair_Row
+}
+
+Transform {
+	translation	0 0 3000
+	children USE Chair_Row
+}
+
+Transform {
+	translation	0 0 4500
+	children USE Chair_Row
+}
+
+
+
+#electric_fan
+EXTERNPROTO fan[
+			field SFInt32 rate_level
+			field SFVec3f fan_position
+			field SFVec3f switch_position 
+			field SFRotation switch_rotation 
+		]"Fan.wrl#electric_fan"
+#Lamp-front
+#Lamp1
+Transform {
+	translation	1350 4000 600
+	rotation 0 1 0 1.571
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#Lamp2
+Transform {
+	translation	-1200 4000 600
+	rotation 0 1 0 1.571
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#row1
+#Lamp1
+Transform {
+	translation	-3385 4000 2000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#electric_fan1
+fan	{rate_level 5 fan_position -1200 2800 1500 switch_position -2800 1000 500 switch_rotation 0 1 0 1.571}
+#Lamp2
+Transform {
+	translation	-120 4000 2000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#electric_fan2
+fan	{rate_level 5 fan_position 1200 2800 1500 switch_position -2800 1000 600 switch_rotation 0 1 0 1.571}
+#Lamp3
+Transform {
+	translation	3385 4000 2000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#row2
+#Lamp1
+Transform {
+	translation	-3385 4000 4000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#electric_fan1
+fan	{rate_level 5 fan_position -1200 2800 3500 switch_position -2800 1000 700 switch_rotation 0 1 0 1.571}
+#Lamp2
+Transform {
+	translation	-120 4000 4000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#electric_fan2
+fan	{rate_level 5 fan_position 1200 2800 3500 switch_position -2800 1000 800 switch_rotation 0 1 0 1.571}
+#Lamp3
+Transform {
+	translation	3385 4000 4000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#row3
+#Lamp1
+Transform {
+	translation	-3385 4000 6000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+
+#Lamp2
+Transform {
+	translation	-120 4000 6000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#Lamp3
+Transform {
+	translation	3385 4000 6000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#row4
+#Lamp1
+Transform {
+	translation	-3385 4000 8000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#electric_fan1
+fan	{rate_level 5 fan_position -1200 2800 5500 switch_position -2800 1000 900 switch_rotation 0 1 0 1.571}
+#Lamp2
+Transform {
+	translation	-120 4000 8000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+#electric_fan2
+fan	{rate_level 5 fan_position 1200 2800 5500 switch_position -2800 1000 1000 switch_rotation 0 1 0 1.571}
+#Lamp3
+Transform {
+	translation	3385 4000 8000
+	children [
+		Inline {
+			url	"Lamp.wrl"
+		}
+	]
+}
+
+
+ROUTE platform.status TO curtain.status

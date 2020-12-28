@@ -1,0 +1,473 @@
+#VRML V2.0 utf8
+
+PROTO platform[ eventOut SFInt32 status ]{
+
+DEF	platform Transform {
+	 scale 10 10 10
+	  rotation 0 -1 0 1.57
+	children [
+Transform {
+  translation	0 0 0
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor 0.3 0.3 0.3
+			transparency 0
+      }
+	  texture ImageTexture {url "texture/wood.jpg"}
+    }
+    geometry	Box { size 500 22 160 }
+  }
+]
+}
+Transform {
+  translation	0 0 96
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor 0.3 0.3 0.3
+			transparency 0
+      }
+	  texture ImageTexture {url "texture/wood.jpg"}
+    }
+    geometry	Box { size 255 22 32 }
+  }
+]
+} 
+
+DEF	teacherDesk Transform {
+	children [
+	Transform {
+  translation	0 61 100
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor 0.5 0.5 0.5
+			transparency 0
+      }
+	  texture ImageTexture {url "texture/platform/desk1.jpg"}
+    }
+    geometry	Box { size 150 100 2 }
+  }
+]
+} 
+DEF left Transform {
+  translation	-74 61 62
+  children [
+Shape {
+    appearance DEF	mat	Appearance {
+      material  Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor 0.5 0.5 0.5
+			transparency 0
+      }
+	  texture ImageTexture {url "texture/platform/desk2.jpg"}
+    }
+    geometry	Box { size 2 100 75 }
+  }
+]
+} 
+DEF right Transform {
+children USE left 
+translation 149 0 0}
+
+DEF	leftHat Transform {
+	translation	0 0 0
+	children [
+	Transform {
+  translation	52.5 111 62.5
+  children [
+Shape {
+    appearance	USE	mat
+    geometry	Box { size 45 4 75 }
+  }
+]
+}
+Transform {
+  translation	15 111 90
+  children [
+Shape {
+    appearance USE mat
+    geometry	Box { size 30 4 20 }
+  }
+]
+}
+Transform {
+  translation	52.5 98 25
+  children [
+Shape {
+    appearance	USE	mat
+    geometry	Box { size 45 30 4 }
+  }
+]
+}
+Transform {
+  translation	37 78 25
+  children [
+Shape {
+    appearance	USE	mat
+    geometry	Box { size 75 10 4 }
+  }
+]
+}
+Transform {
+  translation	15 111 52.5
+  children [
+Shape {
+     appearance USE	mat
+  }
+]
+}
+Transform {
+  translation	15 98 25
+  children [
+Shape {
+    appearance	USE	mat
+    
+    geometry	Box { size 30 30 2 }
+  }
+]
+}
+ Transform {
+  translation	15 111 52.5
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor 0.5 0.5 0.5
+			transparency 0
+      }
+	  texture ImageTexture {url "texture/platform/rightHat.jpg"}
+    }
+    geometry	Box { size 30 2 53 }
+  }
+]
+}
+DEF	touchL TouchSensor {}
+
+]}
+
+DEF	rightHat Transform {
+	translation	0 0 0
+	children [	Transform {
+  translation	-52.5 111 62.5
+  children [
+Shape {
+    appearance	USE	mat
+    geometry	Box { size 45 4 75 }
+  }
+]
+}
+Transform {
+  translation	-15 111 90
+  children [
+Shape {
+    appearance USE mat
+    geometry	Box { size 30 4 20 }
+  }
+]
+}
+Transform {
+  translation	-52.5 98 25
+  children [
+Shape {
+    appearance	USE	mat
+    geometry	Box { size 45 30 4 }
+  }
+]
+}
+Transform {
+  translation	-37 78 25
+  children [
+Shape {
+    appearance	USE	mat
+    geometry	Box { size 75 10 4 }
+  }
+]
+}
+Transform {
+  translation	-15 111 52.5
+  children [
+Shape {
+     appearance USE	mat
+  }
+]
+}
+Transform {
+  translation	-15 98 25
+  children [
+Shape {
+    appearance	USE	mat
+    
+    geometry	Box { size 30 30 2 }
+  }
+]
+}
+ Transform {
+  translation	-15 111 52.5
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor 0.5 0.5 0.5
+			transparency 0
+      }
+	  texture ImageTexture {url "texture/platform/leftHat.jpg"}
+    }
+    geometry	Box { size 30 2 53 }
+  }
+]
+} 
+DEF touchR TouchSensor {}]}
+
+DEF	front Transform	{
+	children [Transform {
+  translation	59 61 25.5
+  children [
+Shape {
+    appearance USE mat
+    geometry	Box { size 30 100 2 }
+  }
+]
+}
+Transform {
+  translation	11 41 25.5
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor 0.5 0.5 0.5
+			transparency 0
+      }
+	  texture ImageTexture {url "texture/platform/desk3.jpg"}
+    }
+    geometry	Box { size 70 60 2 }
+  }
+]
+}
+Transform {
+  translation	11 81 25.5
+  children [
+Shape {
+    appearance	USE	mat
+    geometry	Box { size 70 20 2 }
+  }
+]
+}
+Transform {
+  translation	-49 61 25.5
+  children [
+Shape {
+    appearance	USE	mat
+    geometry	Box { size 50 100 2 }
+  }
+]
+}
+]} 
+
+Transform {			  #the platform to hold computer
+  translation	0 85 63
+  children [
+Shape {
+    appearance	USE	mat
+    geometry	Box { size 150 20 73 }
+  }
+]
+} ]}
+
+ 
+
+DEF	computer Transform {
+	children [
+DEF computer-back Transform {
+  translation	0 100 90
+  children [
+Shape {
+    appearance	USE	mat
+    geometry	Box { size 50 20 2 }
+  }
+]
+}
+DEF computer-left Transform {
+  translation	-25 100 71
+  children [
+Shape {
+    appearance  USE mat 
+    geometry	Box { size 2 20 40 }
+  }
+]
+}
+DEF computer-right Transform {
+children USE computer-left 
+translation 50 0 0}
+
+DEF	computer-front Transform {
+	translation 0 -5 -38
+	children USE computer-back }
+DEF	computer-top Transform {
+  translation	0 103 72
+  rotation -1 0 0 0.2
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor 0.5 0.5 0.5
+			transparency 0
+      }
+	  texture ImageTexture {url "texture/platform/computer.jpg"}
+    }
+    geometry	Box { size 49 2 36 }
+  }
+]
+}
+DEF keyboard Transform {
+  translation	0 95 40
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .6 .6 .6
+			emissiveColor .1 .1 .1
+			ambientIntensity .1
+			shininess .6
+			specularColor 0.5 0.5 0.5
+			transparency 0
+      }
+	  texture ImageTexture {url "texture/platform/keyboard.gif"}
+    }
+    geometry	Box { size 60 2 20 }
+  }
+]
+}
+
+]}
+]}
+
+DEF	openLTime TimeSensor	{cycleInterval 3 loop FALSE }
+DEF	closeLTime TimeSensor {cycleInterval 3 loop FALSE }
+DEF	openRTime TimeSensor	{cycleInterval 3 loop FALSE }
+DEF	closeRTime TimeSensor	{cycleInterval 3 loop FALSE }
+
+
+
+DEF	PlatformOpenClose Script {
+	field SFBool isLClose  TRUE
+    field SFBool isRClose  TRUE 
+	eventIn SFTime touchLTime
+	eventIn	SFTime touchRTime
+
+	eventOut SFTime	openLTime
+	eventOut SFTime	closeLTime
+	eventOut SFTime	openRTime
+	eventOut SFTime	closeRTime
+	eventOut SFInt32 showPPT IS	status
+
+	url	"javascript:
+	function touchLTime(time){
+		if ( isLClose	== true ) {
+			isLClose = false;
+			openLTime = time;	
+		} else {
+		   isLClose = true;
+			closeLTime = time;
+		} 	
+		showPPT = ((!isLClose)?0:1) + ((!isRClose)?0:1);
+	}
+	function touchRTime(time){
+		if ( isRClose	== true ) {
+			isRClose = false;
+			openRTime = time;	
+		} else {
+		   isRClose = true;
+			closeRTime = time;
+		} 	
+		showPPT = ((!isLClose)?0:1) + ((!isRClose)?0:1);
+	} 
+	
+	"
+	
+}
+
+
+
+
+
+
+DEF	openL PositionInterpolator {
+	key	[0 1]
+	keyValue [0 0 0  ,40 0 0 ]
+}
+
+DEF	closeL PositionInterpolator {
+	key	[0 1]
+	keyValue [40 0 0 ,0 0 0]
+}
+
+DEF	openR PositionInterpolator {
+	key	[0 1]
+	keyValue [0 0 0,-40 0 0 ]
+}
+
+DEF	closeR PositionInterpolator {
+	key	[0 1]
+	keyValue [-40 0 0 , 0 0 0 ]
+}
+
+
+ROUTE touchL.touchTime TO PlatformOpenClose.touchLTime
+ROUTE touchR.touchTime TO PlatformOpenClose.touchRTime
+
+
+ROUTE PlatformOpenClose.openLTime  TO openLTime.startTime
+ROUTE PlatformOpenClose.closeLTime TO closeLTime.startTime
+ROUTE openLTime.fraction_changed TO	openL.set_fraction
+ROUTE openL.value_changed TO leftHat.translation
+ROUTE closeLTime.fraction_changed TO closeL.set_fraction
+ROUTE closeL.value_changed TO leftHat.translation
+
+
+ROUTE PlatformOpenClose.openRTime  TO openRTime.startTime
+ROUTE PlatformOpenClose.closeRTime TO closeRTime.startTime
+ROUTE openRTime.fraction_changed TO	openR.set_fraction
+ROUTE openR.value_changed TO rightHat.translation
+ROUTE closeRTime.fraction_changed TO closeR.set_fraction
+ROUTE closeR.value_changed TO rightHat.translation
+
+
+
+}
+platform{}

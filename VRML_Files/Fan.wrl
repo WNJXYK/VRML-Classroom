@@ -1,0 +1,322 @@
+#VRML V2.0 utf8
+
+PROTO electric_fan[
+	field SFInt32 rate_level 5
+	field SFVec3f fan_position 0 0 0
+	field SFVec3f switch_position 0 0 0
+
+	field SFRotation switch_rotation 0 1 0 0
+]
+{
+	Transform {scale 1.5 1.5 1.5 children [
+Transform {
+	
+	translation	IS switch_position
+	rotation IS	switch_rotation
+	children [
+		Transform {
+  translation	0 1 0
+  children [
+	  DEF switch_fan Switch {
+		whichChoice	IS rate_level
+		choice [
+			Shape {
+    			appearance	Appearance {
+    			  material	Material {
+						diffuseColor .6 .6 .6
+						emissiveColor .1 .1 .1
+						ambientIntensity .1
+						shininess .6
+						specularColor 1 1 1
+						transparency 0
+    			  }
+				  texture  ImageTexture {
+					url	"texture/fan/switch0.jpg"
+				  }
+    			}
+    			geometry	Box { size 80 130 40 }
+			  }
+			  Shape {
+    			appearance	Appearance {
+    			  material	Material {
+						diffuseColor .6 .6 .6
+						emissiveColor .1 .1 .1
+						ambientIntensity .1
+						shininess .6
+						specularColor 1 1 1
+						transparency 0
+    			  }
+				  texture  ImageTexture {
+					url	"texture/fan/switch1.jpg"
+				  }
+    			}
+    			geometry	Box { size 80 130 40 }
+			  }
+
+			  Shape {
+    			appearance	Appearance {
+    			  material	Material {
+						diffuseColor .6 .6 .6
+						emissiveColor .1 .1 .1
+						ambientIntensity .1
+						shininess .6
+						specularColor 1 1 1
+						transparency 0
+    			  }
+				  texture  ImageTexture {
+					url	"texture/fan/switch2.jpg"
+				  }
+    			}
+    			geometry	Box { size 80 130 40 }
+			  }
+			  Shape {
+    			appearance	Appearance {
+    			  material	Material {
+						diffuseColor .6 .6 .6
+						emissiveColor .1 .1 .1
+						ambientIntensity .1
+						shininess .6
+						specularColor 1 1 1
+						transparency 0
+    			  }
+				  texture  ImageTexture {
+					url	"texture/fan/switch3.jpg"
+				  }
+    			}
+    			geometry	Box { size 80 130 40 }
+			  }
+			  Shape {
+    			appearance	Appearance {
+    			  material	Material {
+						diffuseColor .6 .6 .6
+						emissiveColor .1 .1 .1
+						ambientIntensity .1
+						shininess .6
+						specularColor 1 1 1
+						transparency 0
+    			  }
+				  texture  ImageTexture {
+					url	"texture/fan/switch4.jpg"
+				  }
+    			}
+    			geometry	Box { size 80 130 40 }
+			  }
+			  Shape {
+    			appearance	Appearance {
+    			  material	Material {
+						diffuseColor .6 .6 .6
+						emissiveColor .1 .1 .1
+						ambientIntensity .1
+						shininess .6
+						specularColor 1 1 1
+						transparency 0
+    			  }
+				  texture  ImageTexture {
+					url	"texture/fan/switch5.jpg"
+				  }
+    			}
+    			geometry	Box { size 80 130 40 }
+			  }
+            
+]
+}
+ DEF	touchFan TouchSensor {}
+]
+}
+
+	]
+}
+
+
+ Transform {
+	 translation IS	fan_position
+	 children [
+		 Transform {
+			 translation	0 -630 0
+			 children [
+				 DEF fan-center Transform {
+					 translation	0 15 0
+					 children [
+						 Shape {
+    						 appearance	Appearance {
+    							 material	Material {
+									 diffuseColor .6 .6 .6
+									 emissiveColor .1 .1 .1
+									 ambientIntensity .1
+									 shininess .6
+									 specularColor 1 1 1
+									 transparency 0
+    							 }
+								 texture ImageTexture {
+									 url	"texture/fan/center.png"
+								 }
+    						 }
+    						 geometry	Cylinder { radius 90 height 30 }
+						 }
+					 ]
+				 }
+
+				 DEF fan-leaf Transform {
+					 translation	0 25 0
+					 children [
+						 Shape {
+    						 appearance	DEF fan-mat Appearance {
+    							 material	Material {
+									 diffuseColor .47 .52 .58
+									 ambientIntensity .123
+									 shininess .13
+									 specularColor 1 1 1
+    							 }
+    						 }
+    						 geometry	DEF fan_leaf_face IndexedFaceSet {
+								 coord Coordinate {
+									 point [85 0 30, 120 0 30, 120 0 -30, 85 0 -30,
+										 120 0 70, 700 0 55, 700 0 -55, 120 0 -70
+									 ]
+								 }
+								 coordIndex [0 1 2 3 -1 4 5 6 7]
+								 solid FALSE
+							 }
+						 }
+					 ]
+				 }
+
+				 DEF fan-leaf1 Transform {
+					 rotation 0 1 0 2.096
+					 children USE fan-leaf
+				 }
+				 DEF fan-leaf2 Transform {
+					 rotation 0 1 0 -2.096
+					 children USE fan-leaf
+				 }
+
+
+
+				 DEF col-sphere Transform {
+					 translation	0 30 0
+					 children [
+						 Shape {
+    						 appearance	USE	fan-mat
+    						 geometry	Extrusion {
+								 crossSection [	9.66 -2.59,
+									 7.07 -7.07,
+									 2.59 -9.77,
+									 -2.59 -9.77,
+									 -7.07 -7.07
+									 -9.66 -2.59,
+									 -9.66 2.59,
+									 -7.07 7.07,
+									 -2.59 9.66,
+									 2.59  9.66,
+									 7.07  7.07,
+									 9.66  2.59
+									 9.66 -2.59]
+								 spine[
+									 0 0  0
+									 0 30 0
+									 0 34 0
+									 0 38 0
+									 0 42 0
+									 0 46 0
+									 0 50 0
+								 ]
+								 scale [2 2,2 2, 1.9 1.9, 1.84 1.84, 1.6 1.6,1.2 1.2, 0 0]
+							 }
+						 }
+					 ]
+				 }
+
+				 DEF col-sphere1 Transform {
+					 translation	0 30 0
+					 children [
+						 Shape {
+    						 appearance	USE	fan-mat
+    						 geometry	Extrusion {
+								 crossSection [	9.66 -2.59,
+									 7.07 -7.07,
+									 2.59 -9.77,
+									 -2.59 -9.77,
+									 -7.07 -7.07
+									 -9.66 -2.59,
+									 -9.66 2.59,
+									 -7.07 7.07,
+									 -2.59 9.66,
+									 2.59  9.66,
+									 7.07  7.07,
+									 9.66  2.59
+									 9.66 -2.59]
+								 spine[
+									 0 550 0
+									 0 554 0
+									 0 558 0
+									 0 562 0
+									 0 566 0
+									 0 570 0
+									 0 600 0
+								 ]
+								 scale [0 0,1.2 1.2, 1.6 1.6 , 1.84 1.84 , 1.9 1.9,2 2,2 2 ]
+							 }
+						 }
+					 ]
+				 }
+				 Transform {
+					 translation	0 330 0
+					 children [
+						 Shape {
+    						 appearance	USE	fan-mat
+    						 geometry	Cylinder { radius 10 height 600 }
+						 }
+					 ]
+				 }
+
+			 ]
+		 }
+	 ]
+ } ]}
+
+
+
+DEF fanTime TimeSensor{cycleInterval 1 loop TRUE enabled FALSE }
+DEF	fanRotate OrientationInterpolator {
+	key	[0 1]
+	keyValue [0 1 0 0, 0 1 0 2.096]
+}
+DEF	fanControll Script {
+	directOutput TRUE
+	field SFInt32 rate_level IS rate_level
+	eventIn	SFTime touchTime
+	eventOut SFBool	isOn 
+	eventOut SFTime	startTime
+	eventOut SFInt32 switchChoice 
+	field SFNode fanTime USE fanTime
+
+	url	"javascript:
+		function touchTime(time){
+			if ( ++rate_level == 6) rate_level=0;
+
+			if ( rate_level == 0 ) isOn = false; 
+			else {
+				isOn = true;							
+			    fanTime.cycleInterval = (6-rate_level)/5;
+				startTime = time;
+			}
+			switchChoice = rate_level;
+			
+		}
+	
+	"
+}
+ROUTE touchFan.touchTime TO	fanControll.touchTime
+ROUTE fanControll.isOn TO fanTime.enabled
+ROUTE fanControll.startTime	TO fanTime.startTime
+ROUTE fanControll.switchChoice TO switch_fan.whichChoice
+ROUTE fanTime.fraction_changed TO fanRotate.set_fraction
+ROUTE fanRotate.value_changed TO fan-leaf.rotation
+
+}
+
+electric_fan	{}
+
+
+
+

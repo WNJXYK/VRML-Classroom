@@ -1,0 +1,117 @@
+#VRML V2.0 utf8
+
+DEF lamp Transform {
+	scale 1.3 1.3 1.3
+	translation	0 -735 0
+	children [
+DEF lamp-beam Transform {
+  translation	0 17.5 0
+  children [
+Shape {
+    appearance	DEF lamp-metal Appearance {
+      material	Material {
+			diffuseColor .1 .1 .10
+			ambientIntensity .25
+			shininess .11
+			specularColor .1 .1 .1
+			emissiveColor .2 .2 .227
+      }
+    }
+    geometry	Box { size 100 35 1250 }
+  }
+]
+}
+
+DEF lamp-cov Transform {
+  children [
+Shape {
+    appearance	USE	lamp-metal
+    geometry	IndexedFaceSet {
+		coord Coordinate {
+			point [50 0 625, 90 -55 625, 90 -55 -625, 50 0 -625,
+				   -50 0 625, -90 -55 625, -90 -55 -625,-50 0 -625
+			]
+		}
+		coordIndex [0 1 2 3 -1 4 5 6 7]
+		solid FALSE
+	}
+  }
+]
+}
+
+
+DEF lamp-L Transform {
+  translation	25 -25 0
+  rotation 1 0 0 1.571
+  children [
+Shape {
+    appearance	DEF lamp-mat Appearance {
+      material	Material {
+			diffuseColor 0 0 0
+			emissiveColor .8 .8 .8
+			ambientIntensity 0
+			specularColor 1 1 1
+      }
+    }
+    geometry	Cylinder { radius 15 height 1210 }
+  }
+]
+}
+DEF lamp-R Transform {
+	translation	-50 0 0
+	children USE lamp-L
+}
+
+
+DEF lamp-col Transform {
+  translation	0 385 425
+  children [
+Shape {
+    appearance	USE	lamp-metal
+    geometry	Cylinder { radius 15 height 700 }
+  }
+]
+}
+DEF lamp-col2 Transform {
+	translation	0 0 -850
+	children USE lamp-col
+}
+
+
+DEF lamp-edge Transform {
+  translation	25 0 605
+  rotation 1 0 0 1.571
+  children [
+Shape {
+    appearance	Appearance {
+      material	Material {
+			diffuseColor .753 .792 .753
+			emissiveColor .298 .298 .298
+			ambientIntensity 0
+			specularColor .502 .502 .502
+      }
+    }
+    geometry	Extrusion {
+		crossSection [-20 0, -20 25, -18 33, -14 39 ,-8 43 ,0 45, 8 43, 14 39 ,18 33 ,20 25, 20 0, -20 0]
+		spine [0 0 0, 0 15 0]
+    }
+  }
+]
+}
+
+DEF lamp-edge1 Transform {
+	translation	-50 0 0
+	children USE lamp-edge
+}
+
+DEF lamp-edge2 Transform {
+	translation	0 0 -1225
+	children USE lamp-edge
+}
+DEF lamp-edge3 Transform {
+	translation	-50 0 -1225
+	children USE lamp-edge
+}
+
+]
+}
